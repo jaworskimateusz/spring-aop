@@ -1,0 +1,14 @@
+@Before("execution(public void spring.aop.dao.AccountDAO.addAccount())")
+
+@Before("execution(public void add*())")
+
+@Before("execution(void add*(spring.aop.run.Account))")
+
+@Before("execution(void add*(Account))") --->>ERROR
+
+@Before("execution(void add*(spring.aop.run.Account, ..))") Account and any number of parameters (..)
+
+@Before("execution(void add*(..))") any number of parameters (..)
+
+@Before("execution(* spring.aop.dao.*.*(..))")
+return type *; spring.aop.run->package ;.*->Class; .*->Method; (..) Params
