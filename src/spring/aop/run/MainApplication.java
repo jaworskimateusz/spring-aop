@@ -16,14 +16,10 @@ public class MainApplication {
 		AccountDAO accountDAO = context.getBean("accountDAO",AccountDAO.class);
 		MembershipDAO membershipDAO = context.getBean(MembershipDAO.class);
 		
-		accountDAO.setName("MattsBank");
 		accountDAO.setServiceCode("007");
-		
-		accountDAO.getName();
 		accountDAO.getServiceCode();
 		
 		accountDAO.addAccount(new Account(), true);
-		accountDAO.doWork();
 		membershipDAO.addMember();
 		context.close();
 	}

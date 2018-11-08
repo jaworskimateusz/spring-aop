@@ -7,11 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(2)
-public class LoggingAspect {
+@Order(3)
+public class ApiAnalyticsAspect {
 
 	@Before("spring.aop.aspect.AopExpressions.whitoutGettersAndSetters()")
-	public void beforeAddAccountAdvice() {
-		System.out.println("\n>>Logging");
+	public void performApiAnalytics() {
+		System.out.println("\n>>Performing API");
 	}
+	
 }
