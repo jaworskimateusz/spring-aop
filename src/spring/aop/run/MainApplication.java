@@ -19,7 +19,9 @@ public class MainApplication {
 		accountDAO.setServiceCode("007");
 		accountDAO.getServiceCode();
 		
-		accountDAO.addAccount(new Account(), true);
+		Account account = new Account();
+		account.setName("007 Secret Service");
+		accountDAO.addAccount(account, true);
 		membershipDAO.addMember();
 		context.close();
 	}
