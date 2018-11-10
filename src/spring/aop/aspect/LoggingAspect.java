@@ -1,6 +1,9 @@
 package spring.aop.aspect;
 
+import java.util.List;
+
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -28,5 +31,23 @@ public class LoggingAspect {
 			}
 		}
 		
+	}
+	
+	@AfterReturning(pointcut="execution(* spring.aop.dao.AccountDAO.findAccounts(..))",
+					returning="result")
+	public void afterReturningFindAccountsAdvice(
+			JoinPoint joinPoint, List<Account> result) {
+			System.out.println("\n>>Aspect: AfterReturninig method >> " +
+			joinPoint.getSignature().toShortString());
+			
+			System.out.println(">>Result: " + result + "\n");
+			convertNameToUpperCase(result);
+			System.out.println(">>Result after modified: " + result + "\n");
+	}
+
+	private void convertNameToUpperCase(List<Account> result) {
+		for(Account account: result) {
+			account.setName(account.getName().toUpperCase());
+		}
 	}
 }

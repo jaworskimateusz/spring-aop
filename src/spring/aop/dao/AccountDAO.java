@@ -1,5 +1,8 @@
 package spring.aop.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import spring.aop.run.Account;
@@ -8,8 +11,15 @@ import spring.aop.run.Account;
 public class AccountDAO {
 	
 	private String name;
-	
 	private String serviceCode;
+	
+	public List<Account> findAccounts() {
+		List<Account> accounts = new ArrayList<>();
+		accounts.add(new Account("John", "Gold"));
+		accounts.add(new Account("Doe", "Silver"));
+		accounts.add(new Account("Matt", "Platinum"));
+		return accounts;
+	}
 	
 	public void addAccount(Account account, boolean vipFlag) {
 		System.out.println(getClass() + " Adding an account..\n");
