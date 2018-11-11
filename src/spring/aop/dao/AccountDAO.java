@@ -13,7 +13,12 @@ public class AccountDAO {
 	private String name;
 	private String serviceCode;
 	
-	public List<Account> findAccounts() {
+	public List<Account> findAccounts(boolean b) {
+		//simple exception simulation
+		if(b) {
+			throw new RuntimeException("Account throw exception");
+		}
+		
 		List<Account> accounts = new ArrayList<>();
 		accounts.add(new Account("John", "Gold"));
 		accounts.add(new Account("Doe", "Silver"));
