@@ -3,6 +3,7 @@ package spring.aop.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -52,6 +53,12 @@ public class LoggingAspect {
 		System.out.println(">>@AfterThrowing: " + joinPoint.getSignature().toShortString());
 		System.out.println("The exception is: " + exception);
 	}
+	
+	@After("execution(* spring.aop.dao.AccountDAO.findAccounts(..))")
+	public void afterFinallyFindAccountsAdvice(JoinPoint joinPoint) {
+		System.out.println("\n>>@After method");
+	}
+	
 
 	private void convertNameToUpperCase(List<Account> result) {
 		for(Account account: result) {
