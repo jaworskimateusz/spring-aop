@@ -65,7 +65,7 @@ public class LoggingAspect {
 	public void afterFinallyFindAccountsAdvice(JoinPoint joinPoint) {
 		logger.info("\n>>@After method");
 	}
-	
+	/*
 	@Around("execution(* spring.aop.service.TrafficFortuneService.getFortune(..))")
 	public Object aroundGeetFortune(ProceedingJoinPoint proceedingJoinPoint )
 		   throws Throwable {
@@ -77,8 +77,30 @@ public class LoggingAspect {
 		logger.info("\nDuration: " + (end - start)/1000.0 + " seconds.");
 		return result;
 	}
+	*/
 	
-
+	@Around("execution(* spring.aop.service.TrafficFortuneService.getFortune(..))")
+	public Object aroundGeetFortune(ProceedingJoinPoint proceedingJoinPoint )
+		   throws Throwable {
+		logger.info(">>@Around method on: " + proceedingJoinPoint.getSignature().toString());
+		long start = System.currentTimeMillis();
+		//handle to target method-> proceedingJoinPoint  execute the target method->proceed()
+		Object result = null;
+		try {
+			result = proceedingJoinPoint.proceed();
+		} catch (Exception e) {
+			logger.warning(e.getMessage());
+			// the exception was never thrown to the Main Appliation
+			result = "Little problem but no wories, I will rescue you!";
+			
+			//in this case the exception is thrown to the Main Application
+			//throw e;
+		}
+		long end = System.currentTimeMillis();
+		logger.info("\nDuration: " + (end - start)/1000.0 + " seconds.");
+		return result;
+	}
+	
 	private void convertNameToUpperCase(List<Account> result) {
 		for(Account account: result) {
 			account.setName(account.getName().toUpperCase());

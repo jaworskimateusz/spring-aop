@@ -15,4 +15,11 @@ public class TrafficFortuneService {
 		}
 		return "Expct heavy traffic this morning.";
 	}
+
+	public String getFortune(boolean b) {
+		if(b) {
+			throw new RuntimeException("Major accident! Crash on the highway");
+		}
+		return this.getFortune();
+	}
 }
